@@ -99,7 +99,7 @@ func finish():
 		finished = true
 		# NOTE: This is called when the credits finish
 		# - Hook up your code to return to the relevant scene here, eg...
-		yield(get_tree().create_timer(5.0), "timeout")
+		yield(get_tree().create_timer(3.0), "timeout")
 		get_tree().change_scene("res://scenes/menu_scene/Menu_scene.tscn")
 		pass
 

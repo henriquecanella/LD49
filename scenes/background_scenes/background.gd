@@ -1,7 +1,7 @@
 extends Sprite
 
 func _ready():
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	$background_sound.play()
 	yield($background_sound, "finished")
 

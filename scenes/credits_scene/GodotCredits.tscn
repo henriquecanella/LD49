@@ -9,15 +9,16 @@ script = ExtResource( 1 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 326.0
+margin_bottom = 1112.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="CreditsContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_top = 1.0
+margin_right = 323.0
+margin_bottom = 1113.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -25,8 +26,10 @@ __meta__ = {
 [node name="Line" type="Label" parent="CreditsContainer"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -14.0
-margin_right = 1023.0
+margin_left = 1.39087
+margin_top = -505.385
+margin_right = 327.391
+margin_bottom = -491.385
 size_flags_horizontal = 3
 text = "Credits line"
 align = 1
