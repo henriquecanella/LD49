@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/NEW_NEWS.wav-6508b6e34650f774e32cf05019d4e558.sample"
+
+[deps]
+
+source_file="res://sounds/NEW_NEWS.wav"
+dest_files=[ "res://.import/NEW_NEWS.wav-6508b6e34650f774e32cf05019d4e558.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

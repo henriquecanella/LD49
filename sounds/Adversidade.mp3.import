@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Adversidade.mp3-076e000e10aae9ac7357a94cd36f605e.mp3str"
+
+[deps]
+
+source_file="res://sounds/Adversidade.mp3"
+dest_files=[ "res://.import/Adversidade.mp3-076e000e10aae9ac7357a94cd36f605e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

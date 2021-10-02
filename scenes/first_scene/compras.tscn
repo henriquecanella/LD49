@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/placeholder_compras_noticias.png" type="Texture" id=1]
+
+[node name="compras" type="NinePatchRect"]
+margin_right = 165.0
+margin_bottom = 412.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
