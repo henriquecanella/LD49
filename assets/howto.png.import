@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/credits.png-6c878d7557dbfec2698f437f71b702d4.stex"
+path="res://.import/howto.png-bbcf7e433bbfac50735e997344d4c457.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/background_scenes/credits.png"
-dest_files=[ "res://.import/credits.png-6c878d7557dbfec2698f437f71b702d4.stex" ]
+source_file="res://assets/howto.png"
+dest_files=[ "res://.import/howto.png-bbcf7e433bbfac50735e997344d4c457.stex" ]
 
 [params]
 
