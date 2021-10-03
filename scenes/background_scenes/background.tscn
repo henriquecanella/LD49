@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/credits.png" type="Texture" id=3]
 [ext_resource path="res://assets/play_hover.png" type="Texture" id=4]
 [ext_resource path="res://scenes/background_scenes/background.gd" type="Script" id=5]
-[ext_resource path="res://sounds/click.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/click_sound.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sounds/menu.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/play.png" type="Texture" id=8]
 [ext_resource path="res://assets/howto_hover.png" type="Texture" id=9]
@@ -27,8 +27,7 @@ margin_right = 959.625
 stream = ExtResource( 7 )
 volume_db = -7.0
 
-[node name="click_sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+[node name="click_sound" parent="." instance=ExtResource( 6 )]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 0.5
@@ -47,7 +46,7 @@ __meta__ = {
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 margin_top = 5.0
 margin_right = 194.0
-margin_bottom = 174.0
+margin_bottom = 163.0
 
 [node name="logo" type="TextureRect" parent="MarginContainer/VBoxContainer2"]
 margin_right = 194.0

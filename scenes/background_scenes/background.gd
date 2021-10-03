@@ -12,5 +12,7 @@ func _on_play_pressed():
 	pass
 
 func _on_credits_pressed():
+	$click_sound.play()
+	yield($click_sound, "finished")
 	get_tree().change_scene("res://scenes/credits_scene/GodotCredits.tscn")
 	pass
