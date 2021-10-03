@@ -97,4 +97,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/CenterContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/CenterContainer/VBoxContainer/HowTo" to="." method="_on_HowTo_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/CenterContainer/VBoxContainer/credits" to="." method="_on_credits_pressed"]
