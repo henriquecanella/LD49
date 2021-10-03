@@ -20,7 +20,11 @@
 [sub_resource type="GDScript" id=4]
 script/source = "extends Node2D
 
-var bank = 0
+var bank = 500
+var select_bitcoin = 0
+var select_slot = 0
+var tex3 = preload(\"res://assets/mini_bolsa.png\")
+onready var bit = get_node(\"MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/ItemList/TextureButton\")
 
 func _ready():
 	$MarginContainer/HBoxContainer/VBoxContainer/money.text = \"$ \" + String(bank)
@@ -28,40 +32,96 @@ func _ready():
 	yield($backtrak , \"finished\")
 	pass
 
-func update_money(value):
-	bank+=value
+func update_money():
 	$MarginContainer/HBoxContainer/VBoxContainer/money.text = \"$ \" + String(bank)
 	pass
 
 func _on_buy_pressed():
-	$button_click.play()
-	yield($button_click , \"finished\")
 	$buy_item.play()
 	yield($buy_item, \"finished\")
+	if(select_bitcoin==1):
+		compute_compra(100,0)
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/bitcoin.png\")
 	pass
 
 
 func _on_sell_pressed():
-	$button_click.play()
-	yield($button_click , \"finished\")
 	$sell_item.play()
 	yield($sell_item, \"finished\")
+	if(select_slot!=0):
+		compute_compra(100,1)
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/espaço_disponivel.png\")
 	pass # Replace with function body.
 
 
 func _on_TextureButton_pressed():
-	update_money(1 as float)
+	bit.set('texture',tex3)
 	$new_news.play()
 	yield($new_news, \"finished\")
 	pass # Replace with function body.
-
-
 	
+func compute_compra(valor, opcao):
+	match opcao:
+		0: 
+			bank-=valor
+			update_money()
+		1: 
+			bank+=valor
+			update_money()
+	pass
+
+func _on_bitcoin_pressed():
+	$button_click.play()
+	yield($button_click , \"finished\")
+	if(select_bitcoin!=1):
+		select_bitcoin = 1
+	else:
+		select_bitcoin=0
+	pass # Replace with function body.
+
+
+func _on_slot1_pressed():
+	$button_click.play()
+	yield($button_click , \"finished\")
+	if(select_slot==0):
+		select_slot = 1
+	else:
+		select_slot = 0
+	pass # Replace with function body.
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="Theme" id=3]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckBox/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckBox/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = null
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/unchecked = null
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
@@ -157,50 +217,82 @@ size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 138.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 2
 
-[node name="bitcoin" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 62.0
+[node name="bitcoin" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 63.0
 margin_bottom = 18.0
-texture = ExtResource( 14 )
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="fazenda" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="bolsa" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 20.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 38.0
-texture = ExtResource( 11 )
+toggle_mode = true
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="bolsa" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="fabrica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 40.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 58.0
-texture = ExtResource( 10 )
+toggle_mode = true
+texture_normal = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="fabrica" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="fazenda" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 60.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 78.0
-texture = ExtResource( 12 )
+toggle_mode = true
+texture_normal = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="musica" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="musica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 80.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 98.0
-texture = ExtResource( 13 )
+toggle_mode = true
+texture_normal = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="programador" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="programador" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 100.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 118.0
-texture = ExtResource( 15 )
+toggle_mode = true
+texture_normal = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="startup" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="startup" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 120.0
-margin_right = 62.0
+margin_right = 63.0
 margin_bottom = 138.0
-texture = ExtResource( 16 )
+toggle_mode = true
+texture_normal = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 105.0
@@ -231,46 +323,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="item1" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot1" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 132.0
 margin_bottom = 36.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item2" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot2" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 41.0
 margin_right = 132.0
 margin_bottom = 77.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item3" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot3" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 82.0
 margin_right = 132.0
 margin_bottom = 118.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item4" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot4" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 123.0
 margin_right = 132.0
 margin_bottom = 159.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item5" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot5" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 164.0
 margin_right = 132.0
 margin_bottom = 200.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item6" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot6" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 205.0
 margin_right = 132.0
 margin_bottom = 241.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
-[node name="item7" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="slot7" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 246.0
 margin_right = 132.0
 margin_bottom = 282.0
-texture = ExtResource( 9 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
 
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 241.0
@@ -312,3 +411,5 @@ volume_db = -10.0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/sell" to="." method="_on_sell_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin" to="." method="_on_bitcoin_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1" to="." method="_on_slot1_pressed"]
