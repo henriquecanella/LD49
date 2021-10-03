@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/background_scenes/infinite_background.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/how_to_image.png" type="Texture" id=2]
-[ext_resource path="res://assets/back.png" type="Texture" id=3]
-[ext_resource path="res://assets/back_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/placeholders/how_to_image.png" type="Texture" id=2]
+[ext_resource path="res://assets/botoes/back.png" type="Texture" id=3]
+[ext_resource path="res://assets/botoes/back_hover.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu_scene/Howto.gd" type="Script" id=5]
 [ext_resource path="res://sounds/click_sound.tscn" type="PackedScene" id=6]
 

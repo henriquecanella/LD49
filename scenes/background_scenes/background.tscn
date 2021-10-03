@@ -2,15 +2,15 @@
 
 [ext_resource path="res://scenes/background_scenes/infinite_background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/background_scenes/logo.png" type="Texture" id=2]
-[ext_resource path="res://assets/credits.png" type="Texture" id=3]
-[ext_resource path="res://assets/play_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/botoes/credits.png" type="Texture" id=3]
+[ext_resource path="res://assets/botoes/play_hover.png" type="Texture" id=4]
 [ext_resource path="res://scenes/background_scenes/background.gd" type="Script" id=5]
 [ext_resource path="res://sounds/click_sound.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sounds/menu.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/play.png" type="Texture" id=8]
-[ext_resource path="res://assets/howto_hover.png" type="Texture" id=9]
-[ext_resource path="res://assets/credits_hover.png" type="Texture" id=10]
-[ext_resource path="res://assets/howto.png" type="Texture" id=11]
+[ext_resource path="res://assets/botoes/play.png" type="Texture" id=8]
+[ext_resource path="res://assets/botoes/howto_hover.png" type="Texture" id=9]
+[ext_resource path="res://assets/botoes/credits_hover.png" type="Texture" id=10]
+[ext_resource path="res://assets/botoes/howto.png" type="Texture" id=11]
 
 [node name="background" type="Node2D"]
 position = Vector2( 160.494, 80.1516 )

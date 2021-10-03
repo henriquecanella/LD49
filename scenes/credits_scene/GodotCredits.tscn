@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scenes/credits_scene/GodotCredits.gd" type="Script" id=1]
 [ext_resource path="res://sounds/land_credits.mp3" type="AudioStream" id=2]
-[ext_resource path="res://assets/pixel_credito.png" type="Texture" id=3]
+[ext_resource path="res://assets/placeholders/pixel_credito.png" type="Texture" id=3]
 [ext_resource path="res://scenes/background_scenes/infinite_background.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/back_hover.png" type="Texture" id=5]
-[ext_resource path="res://assets/back.png" type="Texture" id=6]
+[ext_resource path="res://assets/botoes/back_hover.png" type="Texture" id=5]
+[ext_resource path="res://assets/botoes/back.png" type="Texture" id=6]
 [ext_resource path="res://sounds/click_sound.tscn" type="PackedScene" id=7]
 
 [node name="GodotCredits" type="Control"]
