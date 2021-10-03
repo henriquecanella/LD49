@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sounds/click.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/default.mp3" type="AudioStream" id=2]
@@ -16,8 +16,10 @@
 [ext_resource path="res://assets/mini_bitcoin.png" type="Texture" id=14]
 [ext_resource path="res://assets/mini_programador.png" type="Texture" id=15]
 [ext_resource path="res://assets/mini_startup.png" type="Texture" id=16]
+[ext_resource path="res://assets/howto.png" type="Texture" id=17]
+[ext_resource path="res://scenes/first_scene/DetailsDialog.tscn" type="PackedScene" id=18]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 var bank = 500
@@ -39,9 +41,11 @@ func update_money():
 func _on_buy_pressed():
 	$buy_item.play()
 	yield($buy_item, \"finished\")
-	if(select_bitcoin==1):
-		compute_compra(100,0)
+	if($MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin.pressed):
 		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/bitcoin.png\")
+		compute_compra(1,1)
+	else:
+		$DetailsDialog.open('',\"Não foi selecionado um item para compra\")
 	pass
 
 
@@ -49,7 +53,7 @@ func _on_sell_pressed():
 	$sell_item.play()
 	yield($sell_item, \"finished\")
 	if(select_slot!=0):
-		compute_compra(100,1)
+		compute_compra(100,2)
 		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/espaço_disponivel.png\")
 	pass # Replace with function body.
 
@@ -60,23 +64,60 @@ func _on_TextureButton_pressed():
 	yield($new_news, \"finished\")
 	pass # Replace with function body.
 	
-func compute_compra(valor, opcao):
-	match opcao:
-		0: 
-			bank-=valor
-			update_money()
+func compute_compra(tipo, operacao):
+	match operacao:
 		1: 
-			bank+=valor
-			update_money()
+			match tipo:
+				1:
+					bank-=100
+					update_money()
+				2:
+					bank-=100
+					update_money()
+				3:
+					bank-=100
+					update_money()
+				4:
+					bank-=100
+					update_money()
+				5:
+					bank-=100
+					update_money()
+				6:
+					bank-=100
+					update_money()
+				7:
+					bank-=100
+					update_money()
+			
+		2: 
+			match tipo:
+				1:
+					bank+=100
+					update_money()
+				2:
+					bank+=100
+					update_money()
+				3:
+					bank+=100
+					update_money()
+				4:
+					bank+=100
+					update_money()
+				5:
+					bank+=100
+					update_money()
+				6:
+					bank+=100
+					update_money()
+				7:
+					bank+=100
+					update_money()
 	pass
 
 func _on_bitcoin_pressed():
 	$button_click.play()
 	yield($button_click , \"finished\")
-	if(select_bitcoin!=1):
-		select_bitcoin = 1
-	else:
-		select_bitcoin=0
 	pass # Replace with function body.
 
 
@@ -134,7 +175,7 @@ VScrollBar/styles/scroll_focus = null
 
 [node name="Main" type="Node2D"]
 position = Vector2( 1.30472, 1.2048 )
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -151,19 +192,19 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_top = 10.0
-margin_right = 342.0
+margin_right = 321.0
 margin_bottom = 159.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 101.0
+margin_right = 90.0
 margin_bottom = 149.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="itens" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
-margin_left = 16.0
+margin_left = 11.0
 margin_top = 7.0
-margin_right = 84.0
+margin_right = 79.0
 margin_bottom = 141.0
 texture = ExtResource( 3 )
 
@@ -229,7 +270,7 @@ margin_bottom = 18.0
 toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 14 )
-texture_pressed = ExtResource( 14 )
+texture_pressed = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -295,8 +336,8 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 105.0
-margin_right = 237.0
+margin_left = 94.0
+margin_right = 226.0
 margin_bottom = 149.0
 size_flags_horizontal = 3
 
@@ -372,16 +413,16 @@ toggle_mode = true
 texture_normal = ExtResource( 9 )
 
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 241.0
-margin_right = 342.0
+margin_left = 230.0
+margin_right = 321.0
 margin_bottom = 149.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="news" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer2"]
-margin_left = 16.0
+margin_left = 11.0
 margin_top = 7.0
-margin_right = 84.0
+margin_right = 79.0
 margin_bottom = 141.0
 texture = ExtResource( 3 )
 
@@ -408,6 +449,8 @@ volume_db = -10.0
 [node name="buy_item" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+
+[node name="DetailsDialog" parent="." instance=ExtResource( 18 )]
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/sell" to="." method="_on_sell_pressed"]
