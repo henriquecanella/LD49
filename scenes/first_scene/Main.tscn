@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://sounds/click.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/default.mp3" type="AudioStream" id=2]
@@ -36,6 +36,8 @@
 [ext_resource path="res://assets/mini_items/mini_fabrica_pressed.png" type="Texture" id=34]
 [ext_resource path="res://assets/mini_items/mini_fazenda_pressed.png" type="Texture" id=35]
 [ext_resource path="res://assets/mini_items/mini_musica_pressed.png" type="Texture" id=36]
+[ext_resource path="res://assets/placeholders/news.png" type="Texture" id=37]
+[ext_resource path="res://scenes/News/News.tscn" type="PackedScene" id=38]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -44,7 +46,9 @@ var bank = 500
 var select_bitcoin = 0
 var select_slot = 0
 var tex3 = preload(\"res://assets/mini_items/mini_bolsa.png\")
-onready var bit = get_node(\"MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/ItemList/TextureButton\")
+#onready var bit = get_node(\"MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/ItemList/TextureButton\")
+
+const news_scene = preload(\"res://scenes/News/News.tscn\")
 
 #Bitcoin Vars
 onready var bitcoin_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin
@@ -218,7 +222,7 @@ func _on_sell_pressed():
 
 
 func _on_TextureButton_pressed():
-	bit.set('texture',tex3)
+	#it.set('texture',tex3)
 	$new_news.play()
 	yield($new_news, \"finished\")
 	pass # Replace with function body.
@@ -434,6 +438,42 @@ func _on_ProgramadorTimer_timeout():
 func _on_StartupTimer_timeout():
 	bank += startup_multipliyer*startup_ammount
 	update_money()
+
+
+func _on_NewNews_timeout():
+	randomize()
+	
+	var texts = [
+		\"oi\",
+		\"teste\",
+		\"legal\",
+		\"bonito\",
+		\"chave\",
+		\"brabo\",
+		\"opa\",
+		\"chuva\",
+		\"agua\",
+		\"planeta\",
+		\"fogo\",
+		\"peixe\",
+		\"cleber\",
+		\"craque\",
+		\"neto\",
+		\"ovo\",
+		\"concordo\",
+		\"pedro\",
+		\"banana\",
+		\"macaco\",
+	]
+	
+	var news_container = $MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
+	var news_instance = news_scene.instance()
+	news_instance.get_node(\"Label\").text = texts[rand_range(0,20)]
+	news_container.add_child(news_instance)
+	news_container.move_child(news_instance,0)
+	$new_news.play()
+	yield($button_click , \"finished\")
+	pass
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -964,6 +1004,49 @@ margin_right = 79.0
 margin_bottom = 141.0
 texture = ExtResource( 3 )
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/CenterContainer2/news"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -34.0
+margin_top = -67.0
+margin_right = 34.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer"]
+margin_right = 68.0
+margin_bottom = 131.0
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer"]
+margin_right = 68.0
+margin_bottom = 25.0
+texture = ExtResource( 37 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer"]
+margin_top = 25.0
+margin_right = 68.0
+margin_bottom = 131.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 68.0
+margin_bottom = 26.0
+
+[node name="News" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 38 )]
+margin_top = 0.0
+margin_bottom = 26.0
+
+[node name="NewNews" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+wait_time = 5.0
+autostart = true
+
 [node name="backtrak" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
@@ -1007,3 +1090,4 @@ volume_db = -10.0
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup" to="." method="_on_startup_pressed"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup/StartupTimer" to="." method="_on_StartupTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1" to="." method="_on_slot1_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NewNews" to="." method="_on_NewNews_timeout"]
