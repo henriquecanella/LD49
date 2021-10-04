@@ -443,37 +443,52 @@ func _on_StartupTimer_timeout():
 func _on_NewNews_timeout():
 	randomize()
 	
-	var texts = [
-		\"oi\",
-		\"teste\",
-		\"legal\",
-		\"bonito\",
-		\"chave\",
-		\"brabo\",
-		\"opa\",
-		\"chuva\",
-		\"agua\",
-		\"planeta\",
-		\"fogo\",
-		\"peixe\",
-		\"cleber\",
-		\"craque\",
-		\"neto\",
-		\"ovo\",
-		\"concordo\",
-		\"pedro\",
-		\"banana\",
-		\"macaco\",
+	var preparation = [
+		\"Winter is \\ncoming\",
 	]
 	
+	var events = [
+		\"Given heavy \\nwinter most \\nplants died\"
+	]
+	
+	var preparation_number = 0
+	
 	var news_container = $MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
-	var news_instance = news_scene.instance()
-	news_instance.get_node(\"Label\").text = texts[rand_range(0,20)]
-	news_container.add_child(news_instance)
-	news_container.move_child(news_instance,0)
+	var preparation_instance = news_scene.instance()
+	
+	preparation_instance.get_node(\"Label\").text = preparation[preparation_number]
+	news_container.add_child(preparation_instance)
+	news_container.move_child(preparation_instance,0)
 	$new_news.play()
-	yield($button_click , \"finished\")
+	
+	#Fazenda negative event
+	if (preparation_number == 0):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[0]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		fazenda_value = fazenda_value/2
+		fazenda_multipliyer = fazenda_multipliyer/2
+		
+		fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+		fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_fazenda_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(60)
+		
+		yield($button_click , \"finished\")
 	pass
+	
+func _on_timer_fazenda_timout():
+	fazenda_value = 100
+	fazenda_multipliyer = 10
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -1044,7 +1059,7 @@ margin_top = 0.0
 margin_bottom = 26.0
 
 [node name="NewNews" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-wait_time = 5.0
+wait_time = 60.0
 autostart = true
 
 [node name="backtrak" type="AudioStreamPlayer" parent="."]
