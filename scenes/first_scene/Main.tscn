@@ -330,20 +330,12 @@ func _on_bitcoin_pressed():
 	$button_click.play()
 	yield($button_click , \"finished\")
 	pass # Replace with function body.
-
-
 func _on_slot1_pressed():
-	$button_click.play()
-	yield($button_click , \"finished\")
 	pass # Replace with function body.
-
-
 
 func _on_BitcoinTimer_timeout():
 	bank += bitcoin_multipliyer*bitcoin_ammount
 	update_money()
-
-
 func _on_bolsa_pressed():
 	bitcoin_button.pressed = false
 	fabrica_button.pressed = false
@@ -353,8 +345,6 @@ func _on_bolsa_pressed():
 	startup_button.pressed = false
 	$button_click.play()
 	yield($button_click , \"finished\")
-
-
 func _on_fabrica_pressed():
 	bitcoin_button.pressed = false
 	bolsa_button.pressed = false
@@ -364,8 +354,6 @@ func _on_fabrica_pressed():
 	startup_button.pressed = false
 	$button_click.play()
 	yield($button_click , \"finished\")
-
-
 func _on_fazenda_pressed():
 	bitcoin_button.pressed = false
 	bolsa_button.pressed = false
@@ -375,8 +363,6 @@ func _on_fazenda_pressed():
 	startup_button.pressed = false
 	$button_click.play()
 	yield($button_click , \"finished\")
-
-
 func _on_musica_pressed():
 	bitcoin_button.pressed = false
 	bolsa_button.pressed = false
@@ -386,8 +372,6 @@ func _on_musica_pressed():
 	startup_button.pressed = false
 	$button_click.play()
 	yield($button_click , \"finished\")
-
-
 func _on_programador_pressed():
 	bitcoin_button.pressed = false
 	bolsa_button.pressed = false
@@ -408,50 +392,63 @@ func _on_startup_pressed():
 	programador_button.pressed = false
 	$button_click.play()
 	yield($button_click , \"finished\")
-
-
 func _on_BolsaTimer_timeout():
 	bank += bolsa_multipliyer*bolsa_ammount
 	update_money()
-
-
 func _on_FabricaTimer_timeout():
 	bank += fabrica_multipliyer*fabrica_ammount
 	update_money()
-
-
 func _on_FazendaTimer_timeout():
 	bank += fazenda_multipliyer*fazenda_ammount
 	update_money()
-
-
 func _on_MusicaTimer_timeout():
 	bank += musica_multipliyer*musica_ammount
 	update_money()
-
-
 func _on_ProgramadorTimer_timeout():
 	bank += programador_multipliyer*programador_ammount
 	update_money()
-
-
 func _on_StartupTimer_timeout():
 	bank += startup_multipliyer*startup_ammount
 	update_money()
-
 
 func _on_NewNews_timeout():
 	randomize()
 	
 	var preparation = [
 		\"Winter is \\ncoming\",
+		\"Winter is \\ncoming\",
+		\"rumors \\nabout regula\\nrization of\\ncryptocoins\",
+		\"rumors \\nabout regula\\nrization of\\ncryptocoins\",
+		\"big crise \\nincoming\",
+		\"big crise \\nincoming\",
+		\"inspection \\ncoming\",
+		\"inspection \\ncoming\",
+		\"big festival \\nincoming\",
+		\"big festival \\nincoming\",
+		\"A.I is going\\n to destroy \\nthe world\",
+		\"most star\\ntups fails\",
+		\"most star\\ntups fails\"
 	]
 	
 	var events = [
-		\"Given heavy \\nwinter most \\nplants died\"
+		\"Given heavy \\nwinter most \\nplants died\",
+		\"The winter \\ndidn't really \\ncame\",
+		\"cryptocoins \\nbanned in \\nsome countries\",
+		\"cryptocoins \\ncontinue \\nto rise\",
+		\"the stock \\nmarket \\ncrashed\",
+		\"there was \\nno crise\",
+		\"factory \\ntaxes \\nincrease\",
+		\"tax cuts\",
+		\"the festival \\ndidn't occur\",
+		\"what a \\ngreat show\",
+		\"programmers \\nvs\\nA.I\",
+		\"crisis in \\n the startup \\nmarket\",
+		\"government\\n incentive\\n for startups\"
 	]
 	
-	var preparation_number = 0
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var preparation_number = rng.randi_range(0, 12)
 	
 	var news_container = $MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
 	var preparation_instance = news_scene.instance()
@@ -460,8 +457,8 @@ func _on_NewNews_timeout():
 	news_container.add_child(preparation_instance)
 	news_container.move_child(preparation_instance,0)
 	$new_news.play()
-	
-	#Fazenda negative event
+	print(preparation_number)
+	#Fazenda events
 	if (preparation_number == 0):
 		yield(get_tree().create_timer(30), \"timeout\")
 		
@@ -481,14 +478,300 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_fazenda_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(60)
+		timer.start(45)
 		
 		yield($button_click , \"finished\")
+	if (preparation_number == 1):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[1]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		fazenda_value = fazenda_value
+		fazenda_multipliyer = fazenda_multipliyer
+		
+		fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+		fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_fazenda_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+		
+		yield($button_click , \"finished\")
+	#Bitcoin events
+	if (preparation_number == 2):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[2]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		bitcoin_value = bitcoin_value/2
+		bitcoin_multipliyer = bitcoin_multipliyer/2
+		
+		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_bitcoin_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+		
+		yield($button_click , \"finished\")	
+	if (preparation_number == 3):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[3]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		bitcoin_value = bitcoin_value
+		bitcoin_multipliyer = bitcoin_multipliyer
+		
+		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_bitcoin_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+		
+		yield($button_click , \"finished\")
+	#Bolsa events
+	if (preparation_number == 4):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[4]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		bolsa_value = bolsa_value/2
+		bolsa_multipliyer = bolsa_multipliyer/2
+		
+		bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+		bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_bolsa_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	if (preparation_number == 5):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[5]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		bolsa_value = bolsa_value
+		bolsa_multipliyer = bolsa_multipliyer
+		
+		bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+		bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_bolsa_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+		
+		yield($button_click , \"finished\")
+	#Fabrica
+	if (preparation_number == 6):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[6]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		fabrica_value = fabrica_value/2
+		fabrica_multipliyer = fabrica_multipliyer/2
+		
+		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+		fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_fabrica_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	if (preparation_number == 7):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[7]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		fabrica_value = fabrica_value
+		fabrica_multipliyer = fabrica_multipliyer
+		
+		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+		fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_fabrica_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	#musica
+	if (preparation_number == 8):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[8]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		musica_value = musica_value/2
+		musica_multipliyer = musica_multipliyer/2
+		
+		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+		musica_ammount_text.text = \"x\" + String(musica_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_musica_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	if (preparation_number == 9):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[9]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		musica_value = musica_value
+		musica_multipliyer = musica_multipliyer
+		
+		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+		musica_ammount_text.text = \"x\" + String(musica_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_musica_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	#programador events
+	if (preparation_number == 10):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[10]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		programador_value = programador_value/2
+		programador_multipliyer = programador_multipliyer/2
+		
+		programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+		programador_ammount_text.text = \"x\" + String(programador_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_programador_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	#startup events
+	if (preparation_number == 11):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[11]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		startup_value = startup_value/2
+		startup_multipliyer = startup_multipliyer/2
+		
+		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+		startup_ammount_text.text = \"x\" + String(startup_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_startup_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
+	if (preparation_number == 12):
+		yield(get_tree().create_timer(30), \"timeout\")
+		
+		var event_instance = news_scene.instance()
+		event_instance.get_node(\"Label\").text = events[12]
+		news_container.add_child(event_instance)
+		news_container.move_child(event_instance,0)
+		$new_news.play()
+		
+		startup_value = startup_value
+		startup_multipliyer = startup_multipliyer
+		
+		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+		startup_ammount_text.text = \"x\" + String(startup_ammount)
+		
+		var timer = Timer.new()
+		timer.connect(\"timeout\", self, \"_on_timer_startup_timout\")
+		add_child(timer)
+		timer.one_shot = true
+		timer.start(45)
 	pass
 	
 func _on_timer_fazenda_timout():
 	fazenda_value = 100
 	fazenda_multipliyer = 10
+	fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_bitcoin_timout():
+	bitcoin_value = 100
+	bitcoin_multipliyer = 10
+	bitcoin_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	bitcoin_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_bolsa_timout():
+	bolsa_value = 100
+	bolsa_multipliyer = 10
+	bolsa_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	bolsa_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_fabrica_timout():
+	fabrica_value = 100
+	fabrica_multipliyer = 10
+	fabrica_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	fabrica_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_musica_timout():
+	musica_value = 100
+	musica_multipliyer = 10
+	musica_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	musica_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_programador_timout():
+	programador_value = 100
+	programador_multipliyer = 10
+	programador_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	programador_ammount_text.text = \"x\" + String(fazenda_ammount)
+func _on_timer_startup_timout():
+	startup_value = 100
+	startup_multipliyer = 10
+	startup_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	startup_ammount_text.text = \"x\" + String(fazenda_ammount)
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -667,7 +950,7 @@ margin_right = 66.8056
 margin_bottom = 25.2883
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -695,7 +978,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -723,7 +1006,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -751,7 +1034,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -779,7 +1062,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -807,7 +1090,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -835,7 +1118,7 @@ margin_right = 66.8675
 margin_bottom = 25.162
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Valor: 
+text = "Value: 
 $"
 __meta__ = {
 "_edit_use_anchors_": false
