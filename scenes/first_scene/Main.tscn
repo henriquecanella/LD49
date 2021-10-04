@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sounds/click.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/default.mp3" type="AudioStream" id=2]
@@ -38,6 +38,9 @@
 [ext_resource path="res://assets/mini_items/mini_musica_pressed.png" type="Texture" id=36]
 [ext_resource path="res://assets/placeholders/news.png" type="Texture" id=37]
 [ext_resource path="res://scenes/News/News.tscn" type="PackedScene" id=38]
+[ext_resource path="res://assets/botoes/back_menu.png" type="Texture" id=39]
+[ext_resource path="res://assets/botoes/back_menu_hover.png" type="Texture" id=40]
+[ext_resource path="res://sounds/click_sound.tscn" type="PackedScene" id=41]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -53,63 +56,63 @@ const news_scene = preload(\"res://scenes/News/News.tscn\")
 #Bitcoin Vars
 onready var bitcoin_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin
 onready var bitcoin_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin/Value
-onready var bitcoin_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1/Quantity
+onready var bitcoin_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5/Quantity
 
-var bitcoin_value = 100
+var bitcoin_value = 20000
 var bitcoin_ammount = 0
-var bitcoin_multipliyer = 10
+var bitcoin_multipliyer = 500
 
 #Bolsa Vars
 onready var bolsa_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa
 onready var bolsa_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa/Value
-onready var bolsa_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2/Quantity
+onready var bolsa_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4/Quantity
 
-var bolsa_value = 100
+var bolsa_value = 10000
 var bolsa_ammount = 0
-var bolsa_multipliyer = 10
+var bolsa_multipliyer = 150
 
 #Fabrica Vars
 onready var fabrica_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica
 onready var fabrica_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica/Value
-onready var fabrica_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3/Quantity
+onready var fabrica_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7/Quantity
 
-var fabrica_value = 100
+var fabrica_value = 1000000
 var fabrica_ammount = 0
-var fabrica_multipliyer = 10
+var fabrica_multipliyer = 10000
 
 #Fazenda Vars
 onready var fazenda_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda
 onready var fazenda_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda/Value
-onready var fazenda_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4/Quantity
+onready var fazenda_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6/Quantity
 
-var fazenda_value = 100
+var fazenda_value = 100000
 var fazenda_ammount = 0
-var fazenda_multipliyer = 10
+var fazenda_multipliyer = 2000
 
 #Musica Vars
 onready var musica_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica
 onready var musica_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica/Value
-onready var musica_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5/Quantity
+onready var musica_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3/Quantity
 
-var musica_value = 100
+var musica_value = 2000
 var musica_ammount = 0
-var musica_multipliyer = 10
+var musica_multipliyer = 50
 
 #Programa Vars
 onready var programador_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador
 onready var programador_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador/Value
-onready var programador_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6/Quantity
+onready var programador_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1/Quantity
 
 var programador_value = 100
 var programador_ammount = 0
-var programador_multipliyer = 10
+var programador_multipliyer = 2
 
 #Startup Vars
 onready var startup_button = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup
 onready var startup_value_text = $MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup/Value
-onready var startup_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7/Quantity
+onready var startup_ammount_text = $MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2/Quantity
 
-var startup_value = 100
+var startup_value = 300
 var startup_ammount = 0
 var startup_multipliyer = 10
 
@@ -149,31 +152,31 @@ func _on_buy_pressed():
 	$buy_item.play()
 	yield($buy_item, \"finished\")
 	if(bitcoin_button.pressed and bank >= bitcoin_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/items/bitcoin.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5.texture_normal = load(\"res://assets/items/bitcoin.png\")
 		bitcoin_button.pressed = false
 		compute_compra(1,1)
 	if(bolsa_button.pressed and bank >= bolsa_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2.texture_normal = load(\"res://assets/items/bolsa.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4.texture_normal = load(\"res://assets/items/bolsa.png\")
 		bolsa_button.pressed = false
 		compute_compra(2,1)
 	if(fabrica_button.pressed and bank >= fabrica_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3.texture_normal = load(\"res://assets/items/fabrica.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7.texture_normal = load(\"res://assets/items/fabrica.png\")
 		fabrica_button.pressed = false
 		compute_compra(3,1)
 	if(fazenda_button.pressed and bank >= fazenda_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4.texture_normal = load(\"res://assets/items/fazenda.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6.texture_normal = load(\"res://assets/items/fazenda.png\")
 		fazenda_button.pressed = false
 		compute_compra(4,1)
 	if(musica_button.pressed and bank >= musica_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5.texture_normal = load(\"res://assets/items/musica.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3.texture_normal = load(\"res://assets/items/musica.png\")
 		musica_button.pressed = false
 		compute_compra(5,1)
 	if(programador_button.pressed and bank >= programador_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6.texture_normal = load(\"res://assets/items/programadores.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/items/programadores.png\")
 		programador_button.pressed = false
 		compute_compra(6,1)
 	if(startup_button.pressed and bank >= startup_value):
-		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7.texture_normal = load(\"res://assets/items/startup.png\")
+		$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2.texture_normal = load(\"res://assets/items/startup.png\")
 		startup_button.pressed = false
 		compute_compra(7,1)
 	pass
@@ -186,37 +189,37 @@ func _on_sell_pressed():
 		compute_compra(1,2)
 		bitcoin_button.pressed = false
 		if (bitcoin_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(bolsa_button.pressed and bolsa_ammount > 0):
 		compute_compra(2,2)
 		bolsa_button.pressed = false
 		if (bolsa_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(fabrica_button.pressed and fabrica_ammount > 0):
 		compute_compra(3,2)
 		fabrica_button.pressed = false
 		if (fabrica_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(fazenda_button.pressed and fazenda_ammount > 0):
 		compute_compra(4,2)
 		fazenda_button.pressed = false
 		if (fazenda_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot4.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(musica_button.pressed and musica_ammount > 0):
 		compute_compra(5,2)
 		musica_button.pressed = false
 		if (musica_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot5.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot3.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(programador_button.pressed and programador_ammount > 0):
 		compute_compra(6,2)
 		programador_button.pressed = false
 		if (programador_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot6.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 	if(startup_button.pressed and startup_ammount > 0):
 		compute_compra(7,2)
 		startup_button.pressed = false
 		if (startup_ammount == 0):
-			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot7.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
+			$MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot2.texture_normal = load(\"res://assets/placeholders/espaço_disponivel.png\")
 			
 	pass # Replace with function body.
 
@@ -460,7 +463,7 @@ func _on_NewNews_timeout():
 	print(preparation_number)
 	#Fazenda events
 	if (preparation_number == 0):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[0]
@@ -469,7 +472,7 @@ func _on_NewNews_timeout():
 		$new_news.play()
 		
 		fazenda_value = fazenda_value/2
-		fazenda_multipliyer = fazenda_multipliyer/2
+		fazenda_multipliyer = 20
 		
 		fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
 		fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
@@ -478,11 +481,11 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_fazenda_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 		
 		yield($button_click , \"finished\")
 	if (preparation_number == 1):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[1]
@@ -500,12 +503,12 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_fazenda_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 		
 		yield($button_click , \"finished\")
 	#Bitcoin events
 	if (preparation_number == 2):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[2]
@@ -514,7 +517,7 @@ func _on_NewNews_timeout():
 		$new_news.play()
 		
 		bitcoin_value = bitcoin_value/2
-		bitcoin_multipliyer = bitcoin_multipliyer/2
+		bitcoin_multipliyer = 5
 		
 		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
 		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
@@ -523,11 +526,11 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_bitcoin_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 		
 		yield($button_click , \"finished\")	
 	if (preparation_number == 3):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[3]
@@ -535,8 +538,8 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		bitcoin_value = bitcoin_value
-		bitcoin_multipliyer = bitcoin_multipliyer
+		bitcoin_value = 30000
+		bitcoin_multipliyer = 600
 		
 		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
 		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
@@ -545,12 +548,12 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_bitcoin_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 		
 		yield($button_click , \"finished\")
 	#Bolsa events
 	if (preparation_number == 4):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[4]
@@ -558,8 +561,8 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		bolsa_value = bolsa_value/2
-		bolsa_multipliyer = bolsa_multipliyer/2
+		bolsa_value = bolsa_value/4
+		bolsa_multipliyer = 30
 		
 		bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
 		bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
@@ -568,9 +571,9 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_bolsa_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	if (preparation_number == 5):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[5]
@@ -588,12 +591,12 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_bolsa_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 		
 		yield($button_click , \"finished\")
 	#Fabrica
 	if (preparation_number == 6):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[6]
@@ -601,7 +604,7 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		fabrica_value = fabrica_value/2
+		fabrica_value = 1500000
 		fabrica_multipliyer = fabrica_multipliyer/2
 		
 		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
@@ -611,9 +614,9 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_fabrica_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	if (preparation_number == 7):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[7]
@@ -622,7 +625,7 @@ func _on_NewNews_timeout():
 		$new_news.play()
 		
 		fabrica_value = fabrica_value
-		fabrica_multipliyer = fabrica_multipliyer
+		fabrica_multipliyer = 13000
 		
 		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
 		fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
@@ -631,10 +634,10 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_fabrica_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	#musica
 	if (preparation_number == 8):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[8]
@@ -642,8 +645,8 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		musica_value = musica_value/2
-		musica_multipliyer = musica_multipliyer/2
+		musica_value = 3000
+		musica_multipliyer = 0
 		
 		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
 		musica_ammount_text.text = \"x\" + String(musica_ammount)
@@ -652,9 +655,9 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_musica_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	if (preparation_number == 9):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[9]
@@ -663,7 +666,7 @@ func _on_NewNews_timeout():
 		$new_news.play()
 		
 		musica_value = musica_value
-		musica_multipliyer = musica_multipliyer
+		musica_multipliyer = 75
 		
 		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
 		musica_ammount_text.text = \"x\" + String(musica_ammount)
@@ -672,10 +675,10 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_musica_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	#programador events
 	if (preparation_number == 10):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[10]
@@ -683,8 +686,8 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		programador_value = programador_value/2
-		programador_multipliyer = programador_multipliyer/2
+		programador_value = 200
+		programador_multipliyer = programador_multipliyer
 		
 		programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
 		programador_ammount_text.text = \"x\" + String(programador_ammount)
@@ -693,10 +696,10 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_programador_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	#startup events
 	if (preparation_number == 11):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[11]
@@ -704,7 +707,7 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		startup_value = startup_value/2
+		startup_value = startup_value*2
 		startup_multipliyer = startup_multipliyer/2
 		
 		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
@@ -714,9 +717,9 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_startup_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	if (preparation_number == 12):
-		yield(get_tree().create_timer(30), \"timeout\")
+		yield(get_tree().create_timer(10), \"timeout\")
 		
 		var event_instance = news_scene.instance()
 		event_instance.get_node(\"Label\").text = events[12]
@@ -724,7 +727,7 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		startup_value = startup_value
+		startup_value = startup_value/2
 		startup_multipliyer = startup_multipliyer
 		
 		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
@@ -734,44 +737,51 @@ func _on_NewNews_timeout():
 		timer.connect(\"timeout\", self, \"_on_timer_startup_timout\")
 		add_child(timer)
 		timer.one_shot = true
-		timer.start(45)
+		timer.start(15)
 	pass
 	
 func _on_timer_fazenda_timout():
-	fazenda_value = 100
-	fazenda_multipliyer = 10
+	fazenda_value = 100000
+	fazenda_multipliyer = 2000
 	fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
 	fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 func _on_timer_bitcoin_timout():
-	bitcoin_value = 100
-	bitcoin_multipliyer = 10
-	bitcoin_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	bitcoin_ammount_text.text = \"x\" + String(fazenda_ammount)
+	bitcoin_value = 20000
+	bitcoin_multipliyer = 500
+	bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+	bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 func _on_timer_bolsa_timout():
-	bolsa_value = 100
-	bolsa_multipliyer = 10
-	bolsa_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	bolsa_ammount_text.text = \"x\" + String(fazenda_ammount)
+	bolsa_value = 10000
+	bolsa_multipliyer = 150
+	bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+	bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 func _on_timer_fabrica_timout():
-	fabrica_value = 100
-	fabrica_multipliyer = 10
-	fabrica_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	fabrica_ammount_text.text = \"x\" + String(fazenda_ammount)
+	fabrica_value = 1000000
+	fabrica_multipliyer = 10000
+	fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+	fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 func _on_timer_musica_timout():
-	musica_value = 100
-	musica_multipliyer = 10
-	musica_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	musica_ammount_text.text = \"x\" + String(fazenda_ammount)
+	musica_value = 2000
+	musica_multipliyer = 50
+	musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+	musica_ammount_text.text = \"x\" + String(musica_ammount)
 func _on_timer_programador_timout():
 	programador_value = 100
-	programador_multipliyer = 10
-	programador_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	programador_ammount_text.text = \"x\" + String(fazenda_ammount)
+	programador_multipliyer = 2
+	programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+	programador_ammount_text.text = \"x\" + String(programador_ammount)
 func _on_timer_startup_timout():
-	startup_value = 100
+	startup_value = 300
 	startup_multipliyer = 10
-	startup_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
-	startup_ammount_text.text = \"x\" + String(fazenda_ammount)
+	startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+	startup_ammount_text.text = \"x\" + String(startup_ammount)
+
+
+func _on_BackButton_pressed():
+	$click_sound.play()
+	yield($click_sound, \"finished\")
+	get_tree().change_scene(\"res://scenes/menu_scene/Menu_scene.tscn\")
+	pass
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -927,9 +937,121 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 2
 
-[node name="bitcoin" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="programador" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 64.0
 margin_bottom = 20.0
+toggle_mode = true
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 32 )
+texture_hover = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgramadorTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador"]
+autostart = true
+
+[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador"]
+margin_left = 26.8675
+margin_top = 5.16202
+margin_right = 66.8675
+margin_bottom = 25.162
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Value: 
+$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="startup" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 42.0
+toggle_mode = true
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 33 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartupTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup"]
+autostart = true
+
+[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup"]
+margin_left = 26.8675
+margin_top = 5.16202
+margin_right = 66.8675
+margin_bottom = 25.162
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Value: 
+$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="musica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 64.0
+margin_bottom = 64.0
+toggle_mode = true
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 36 )
+texture_hover = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica"]
+autostart = true
+
+[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica"]
+margin_left = 26.8675
+margin_top = 5.16202
+margin_right = 66.8675
+margin_bottom = 25.162
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Value: 
+$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bolsa" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 64.0
+margin_bottom = 86.0
+toggle_mode = true
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 31 )
+texture_hover = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BolsaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa"]
+autostart = true
+
+[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa"]
+margin_left = 26.8675
+margin_top = 5.16202
+margin_right = 66.8675
+margin_bottom = 25.162
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Value: 
+$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bitcoin" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 64.0
+margin_bottom = 108.0
 rect_pivot_offset = Vector2( 0.0445271, 0.0981789 )
 toggle_mode = true
 action_mode = 0
@@ -956,66 +1078,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bolsa" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 22.0
-margin_right = 64.0
-margin_bottom = 42.0
-toggle_mode = true
-texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 31 )
-texture_hover = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BolsaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa"]
-autostart = true
-
-[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa"]
-margin_left = 26.8675
-margin_top = 5.16202
-margin_right = 66.8675
-margin_bottom = 25.162
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Value: 
-$"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="fabrica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 44.0
-margin_right = 64.0
-margin_bottom = 64.0
-toggle_mode = true
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 34 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FabricaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica"]
-autostart = true
-
-[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica"]
-margin_left = 26.8675
-margin_top = 5.16202
-margin_right = 66.8675
-margin_bottom = 25.162
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Value: 
-$"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="fazenda" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 66.0
+margin_top = 110.0
 margin_right = 64.0
-margin_bottom = 86.0
+margin_bottom = 130.0
 toggle_mode = true
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 35 )
@@ -1040,78 +1106,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="musica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 88.0
-margin_right = 64.0
-margin_bottom = 108.0
-toggle_mode = true
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 36 )
-texture_hover = ExtResource( 27 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica"]
-autostart = true
-
-[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica"]
-margin_left = 26.8675
-margin_top = 5.16202
-margin_right = 66.8675
-margin_bottom = 25.162
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Value: 
-$"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="programador" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 110.0
-margin_right = 64.0
-margin_bottom = 130.0
-toggle_mode = true
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 32 )
-texture_hover = ExtResource( 28 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgramadorTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador"]
-autostart = true
-
-[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador"]
-margin_left = 26.8675
-margin_top = 5.16202
-margin_right = 66.8675
-margin_bottom = 25.162
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Value: 
-$"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="startup" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="fabrica" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 132.0
 margin_right = 64.0
 margin_bottom = 152.0
 toggle_mode = true
-texture_normal = ExtResource( 16 )
-texture_pressed = ExtResource( 33 )
-texture_hover = ExtResource( 25 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 34 )
+texture_hover = ExtResource( 24 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartupTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup"]
+[node name="FabricaTimer" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica"]
 autostart = true
 
-[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup"]
+[node name="Value" type="Label" parent="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica"]
 margin_left = 26.8675
 margin_top = 5.16202
 margin_right = 66.8675
@@ -1342,8 +1352,10 @@ margin_top = 0.0
 margin_bottom = 26.0
 
 [node name="NewNews" type="Timer" parent="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-wait_time = 60.0
+wait_time = 20.0
 autostart = true
+
+[node name="click_sound" parent="." instance=ExtResource( 41 )]
 
 [node name="backtrak" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
@@ -1371,21 +1383,33 @@ volume_db = -10.0
 
 [node name="DetailsDialog" parent="." instance=ExtResource( 18 )]
 
+[node name="BackButton" type="TextureButton" parent="."]
+margin_left = 10.6953
+margin_top = 2.7952
+margin_right = 29.6953
+margin_bottom = 12.7952
+texture_normal = ExtResource( 39 )
+texture_hover = ExtResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/sell" to="." method="_on_sell_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin" to="." method="_on_bitcoin_pressed"]
-[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin/BitcoinTimer" to="." method="_on_BitcoinTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa" to="." method="_on_bolsa_pressed"]
-[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa/BolsaTimer" to="." method="_on_BolsaTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica" to="." method="_on_fabrica_pressed"]
-[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica/FabricaTimer" to="." method="_on_FabricaTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda" to="." method="_on_fazenda_pressed"]
-[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda/FazendaTimer" to="." method="_on_FazendaTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica" to="." method="_on_musica_pressed"]
-[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica/MusicaTimer" to="." method="_on_MusicaTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador" to="." method="_on_programador_pressed"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/programador/ProgramadorTimer" to="." method="_on_ProgramadorTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup" to="." method="_on_startup_pressed"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/startup/StartupTimer" to="." method="_on_StartupTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica" to="." method="_on_musica_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/musica/MusicaTimer" to="." method="_on_MusicaTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa" to="." method="_on_bolsa_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bolsa/BolsaTimer" to="." method="_on_BolsaTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin" to="." method="_on_bitcoin_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/bitcoin/BitcoinTimer" to="." method="_on_BitcoinTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda" to="." method="_on_fazenda_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fazenda/FazendaTimer" to="." method="_on_FazendaTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica" to="." method="_on_fabrica_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer/itens/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/fabrica/FabricaTimer" to="." method="_on_FabricaTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/slot1" to="." method="_on_slot1_pressed"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/CenterContainer2/news/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NewNews" to="." method="_on_NewNews_timeout"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

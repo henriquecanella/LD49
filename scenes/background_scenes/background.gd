@@ -2,8 +2,7 @@ extends Node2D
 
 func _ready():
 	yield(get_tree().create_timer(1), "timeout")
-	$background_sound.play()
-	yield($background_sound, "finished")
+	MusicController.play_music()
 
 func _on_play_pressed():
 	$click_sound.play()
