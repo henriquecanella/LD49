@@ -1,6 +1,6 @@
 extends Node
 
-var music = load("res://sounds/land_credits.mp3")
+var music = load("res://sounds/Perdição. final.wav")
 
 func _ready():
 	pass # Replace with function body.

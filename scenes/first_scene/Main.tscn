@@ -120,25 +120,25 @@ func _ready():
 
 	$MarginContainer/HBoxContainer/VBoxContainer/money.text = \"$ \" + String(bank)
 	#Set Bitcoin Values
-	bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+	bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 	bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 	#Set Bolsa Values
-	bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+	bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 	bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 	#Set Fabrica Values
-	fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+	fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 	fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 	#Set Fazenda Values
-	fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 	fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 	#Set Musica Values
-	musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+	musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 	musica_ammount_text.text = \"x\" + String(musica_ammount)
 	#Set Programador Values
-	programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+	programador_value_text.text = \"Value: \\n$\" + String(programador_value)
 	programador_ammount_text.text = \"x\" + String(programador_ammount)
 	#Set Startup Values
-	startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+	startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 	startup_ammount_text.text = \"x\" + String(startup_ammount)
 	#$backtrack.play()
 	yield($backtrak , \"finished\")
@@ -237,43 +237,43 @@ func compute_compra(tipo, operacao):
 				1:
 					bank-=bitcoin_value
 					bitcoin_ammount += 1
-					bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+					bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 					bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 					update_money()
 				2:
 					bank-=bolsa_value
 					bolsa_ammount +=1
-					bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+					bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 					bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 					update_money()
 				3:
 					bank-=fabrica_value
 					fabrica_ammount+=1
-					fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+					fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 					fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 					update_money()
 				4:
 					bank-=fazenda_value
 					fazenda_ammount+=1
-					fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+					fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 					fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 					update_money()
 				5:
 					bank-=musica_value
 					musica_ammount+=1
-					musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+					musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 					musica_ammount_text.text = \"x\" + String(musica_ammount)
 					update_money()
 				6:
 					bank-=programador_value
 					programador_ammount+=1
-					programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+					programador_value_text.text = \"Value: \\n$\" + String(programador_value)
 					programador_ammount_text.text = \"x\" + String(programador_ammount)
 					update_money()
 				7:
 					bank-=startup_value
 					startup_ammount+=1
-					startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+					startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 					startup_ammount_text.text = \"x\" + String(startup_ammount)
 					update_money()
 			
@@ -282,43 +282,43 @@ func compute_compra(tipo, operacao):
 				1:
 					bank+=bitcoin_value
 					bitcoin_ammount -= 1
-					bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+					bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 					bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 					update_money()
 				2:
 					bank+=bolsa_value
 					bolsa_ammount -=1
-					bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+					bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 					bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 					update_money()
 				3:
 					bank+=fabrica_value
 					fabrica_ammount-=1
-					fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+					fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 					fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 					update_money()
 				4:
 					bank+=fazenda_value
 					fazenda_ammount-=1
-					fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+					fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 					fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 					update_money()
 				5:
 					bank+=musica_value
 					musica_ammount-=1
-					musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+					musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 					musica_ammount_text.text = \"x\" + String(musica_ammount)
 					update_money()
 				6:
 					bank+=programador_value
 					programador_ammount-=1
-					programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+					programador_value_text.text = \"Value: \\n$\" + String(programador_value)
 					programador_ammount_text.text = \"x\" + String(programador_ammount)
 					update_money()
 				7:
 					bank+=startup_value
 					startup_ammount-=1
-					startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+					startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 					startup_ammount_text.text = \"x\" + String(startup_ammount)
 					update_money()
 	pass
@@ -436,7 +436,7 @@ func _on_NewNews_timeout():
 	var events = [
 		\"Given heavy \\nwinter most \\nplants died\",
 		\"The winter \\ndidn't really \\ncame\",
-		\"cryptocoins \\nbanned in \\nsome countries\",
+		\"cryptocoins \\nbanned in \\nsome \\ncountries\",
 		\"cryptocoins \\ncontinue \\nto rise\",
 		\"the stock \\nmarket \\ncrashed\",
 		\"there was \\nno crise\",
@@ -460,7 +460,6 @@ func _on_NewNews_timeout():
 	news_container.add_child(preparation_instance)
 	news_container.move_child(preparation_instance,0)
 	$new_news.play()
-	print(preparation_number)
 	#Fazenda events
 	if (preparation_number == 0):
 		yield(get_tree().create_timer(10), \"timeout\")
@@ -471,10 +470,10 @@ func _on_NewNews_timeout():
 		news_container.move_child(event_instance,0)
 		$new_news.play()
 		
-		fazenda_value = fazenda_value/2
+		fazenda_value = fazenda_value*2
 		fazenda_multipliyer = 20
 		
-		fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+		fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 		fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 		
 		var timer = Timer.new()
@@ -496,7 +495,7 @@ func _on_NewNews_timeout():
 		fazenda_value = fazenda_value
 		fazenda_multipliyer = fazenda_multipliyer
 		
-		fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+		fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 		fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 		
 		var timer = Timer.new()
@@ -519,7 +518,7 @@ func _on_NewNews_timeout():
 		bitcoin_value = bitcoin_value/2
 		bitcoin_multipliyer = 5
 		
-		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+		bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 		
 		var timer = Timer.new()
@@ -541,7 +540,7 @@ func _on_NewNews_timeout():
 		bitcoin_value = 30000
 		bitcoin_multipliyer = 600
 		
-		bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+		bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 		bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 		
 		var timer = Timer.new()
@@ -564,7 +563,7 @@ func _on_NewNews_timeout():
 		bolsa_value = bolsa_value/4
 		bolsa_multipliyer = 30
 		
-		bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+		bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 		bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 		
 		var timer = Timer.new()
@@ -584,7 +583,7 @@ func _on_NewNews_timeout():
 		bolsa_value = bolsa_value
 		bolsa_multipliyer = bolsa_multipliyer
 		
-		bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+		bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 		bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 		
 		var timer = Timer.new()
@@ -607,7 +606,7 @@ func _on_NewNews_timeout():
 		fabrica_value = 1500000
 		fabrica_multipliyer = fabrica_multipliyer/2
 		
-		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+		fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 		fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 		
 		var timer = Timer.new()
@@ -627,7 +626,7 @@ func _on_NewNews_timeout():
 		fabrica_value = fabrica_value
 		fabrica_multipliyer = 13000
 		
-		fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+		fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 		fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 		
 		var timer = Timer.new()
@@ -648,7 +647,7 @@ func _on_NewNews_timeout():
 		musica_value = 3000
 		musica_multipliyer = 0
 		
-		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+		musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 		musica_ammount_text.text = \"x\" + String(musica_ammount)
 		
 		var timer = Timer.new()
@@ -668,7 +667,7 @@ func _on_NewNews_timeout():
 		musica_value = musica_value
 		musica_multipliyer = 75
 		
-		musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+		musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 		musica_ammount_text.text = \"x\" + String(musica_ammount)
 		
 		var timer = Timer.new()
@@ -689,7 +688,7 @@ func _on_NewNews_timeout():
 		programador_value = 200
 		programador_multipliyer = programador_multipliyer
 		
-		programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+		programador_value_text.text = \"Value: \\n$\" + String(programador_value)
 		programador_ammount_text.text = \"x\" + String(programador_ammount)
 		
 		var timer = Timer.new()
@@ -710,7 +709,7 @@ func _on_NewNews_timeout():
 		startup_value = startup_value*2
 		startup_multipliyer = startup_multipliyer/2
 		
-		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+		startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 		startup_ammount_text.text = \"x\" + String(startup_ammount)
 		
 		var timer = Timer.new()
@@ -730,7 +729,7 @@ func _on_NewNews_timeout():
 		startup_value = startup_value/2
 		startup_multipliyer = startup_multipliyer
 		
-		startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+		startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 		startup_ammount_text.text = \"x\" + String(startup_ammount)
 		
 		var timer = Timer.new()
@@ -743,37 +742,37 @@ func _on_NewNews_timeout():
 func _on_timer_fazenda_timout():
 	fazenda_value = 100000
 	fazenda_multipliyer = 2000
-	fazenda_value_text.text = \"Valor: \\n$\" + String(fazenda_value)
+	fazenda_value_text.text = \"Value: \\n$\" + String(fazenda_value)
 	fazenda_ammount_text.text = \"x\" + String(fazenda_ammount)
 func _on_timer_bitcoin_timout():
 	bitcoin_value = 20000
 	bitcoin_multipliyer = 500
-	bitcoin_value_text.text = \"Valor: \\n$\" + String(bitcoin_value)
+	bitcoin_value_text.text = \"Value: \\n$\" + String(bitcoin_value)
 	bitcoin_ammount_text.text = \"x\" + String(bitcoin_ammount)
 func _on_timer_bolsa_timout():
 	bolsa_value = 10000
 	bolsa_multipliyer = 150
-	bolsa_value_text.text = \"Valor: \\n$\" + String(bolsa_value)
+	bolsa_value_text.text = \"Value: \\n$\" + String(bolsa_value)
 	bolsa_ammount_text.text = \"x\" + String(bolsa_ammount)
 func _on_timer_fabrica_timout():
 	fabrica_value = 1000000
 	fabrica_multipliyer = 10000
-	fabrica_value_text.text = \"Valor: \\n$\" + String(fabrica_value)
+	fabrica_value_text.text = \"Value: \\n$\" + String(fabrica_value)
 	fabrica_ammount_text.text = \"x\" + String(fabrica_ammount)
 func _on_timer_musica_timout():
 	musica_value = 2000
 	musica_multipliyer = 50
-	musica_value_text.text = \"Valor: \\n$\" + String(musica_value)
+	musica_value_text.text = \"Value: \\n$\" + String(musica_value)
 	musica_ammount_text.text = \"x\" + String(musica_ammount)
 func _on_timer_programador_timout():
 	programador_value = 100
 	programador_multipliyer = 2
-	programador_value_text.text = \"Valor: \\n$\" + String(programador_value)
+	programador_value_text.text = \"Value: \\n$\" + String(programador_value)
 	programador_ammount_text.text = \"x\" + String(programador_ammount)
 func _on_timer_startup_timout():
 	startup_value = 300
 	startup_multipliyer = 10
-	startup_value_text.text = \"Valor: \\n$\" + String(startup_value)
+	startup_value_text.text = \"Value: \\n$\" + String(startup_value)
 	startup_ammount_text.text = \"x\" + String(startup_ammount)
 
 

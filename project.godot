@@ -22,8 +22,9 @@ MusicController="*res://autoloads/MusicController.tscn"
 
 window/size/width=320
 window/size/height=180
-window/size/test_width=1024
-window/size/test_height=600
+window/size/fullscreen=true
+window/size/test_width=960
+window/size/test_height=540
 mouse_cursor/custom_image="res://assets/placeholders/cursor.png"
 mouse_cursor/custom_image_hotspot=Vector2( 10, 10 )
 window/stretch/mode="viewport"
@@ -32,6 +33,7 @@ window/stretch/aspect="keep"
 [global]
 
 display=false
+window=false
 
 [physics]
 
